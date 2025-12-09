@@ -1,0 +1,77 @@
+Break-fix activity
+Objectives
+Investigate why the migrated web application is failing to load the landing page.
+
+Solve the landing page issue from web application in a hands-on lab environment.
+
+Scenario
+Your team is facing a massive problem with a new production deployment and it is affecting the company's management. Your team migrated a customized application from server to OpenShift, and it is failing. Web server is not showing the landing page and your team is receiving complaints for the same. Your job is to make the landing page of the web server up and running as soon as possible.
+
+After migrating the application pods are running but unable to access the web page:
+
+NAME                                   READY   STATUS    RESTARTS   AGE
+management-frontend-7b7dd45f7b-fvgv6   1/1     Running   0          95s
+management-intake-7d849848d5-fbftk     1/1     Running   0          95s
+
+[student@workstation ~]$ curl management-frontend-route-management-profiles.apps.ocp4.example.com
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>403 Forbidden</title>
+</head><body>
+<h1>Forbidden</h1>
+<p>You don't have permission to access this resource.</p>
+</body></html>
+Recreate scenario
+Recreate this scenario by running the following on the workstation VM as the student user:
+
+[student@workstation ~]$ lab start breakfix002-webapp
+
+SUCCESS Verifying cluster state
+SUCCESS Creating resources from manifest file namespace.yaml
+        - Created: namespace/management-profiles
+SUCCESS Creating resources from manifest file pvc.yaml
+        - Created: persistentvolumeclaim/shared-profiles
+SUCCESS Creating resources from manifest file webfront-app.yaml
+        - Created: deployment.apps/management-frontend
+SUCCESS Creating resources from manifest file backend-app.yaml
+        - Created: deployment.apps/management-intake
+SUCCESS Creating resources from manifest file webfront-svc.yaml
+        - Created: service/management-frontend
+SUCCESS Creating resources from manifest file webfront-route.yaml
+        - Created: route.route.openshift.io/management-frontend-route
+Note
+"Verifying cluster state" might take several minutes to complete If you notice any error like "An error has ocurred. Check the logs for more details" or "FAIL Verifying cluster state" then re-run "lab start breakfix002-webap" command.
+
+This step makes the web page of the webfront application inaccessible.
+
+To ensure scenario is recreated, log in to the OCP cluster and try to access web page:
+
+[student@workstation ~]$ oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+Login successful.
+
+You have access to 71 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+Welcome! See 'oc help' to get started.
+
+[student@workstation ~]$ curl management-frontend-route-management-profiles.apps.ocp4.example.com
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>403 Forbidden</title>
+</head><body>
+<h1>Forbidden</h1>
+<p>You don't have permission to access this resource.</p>
+</body></html>
+Grade
+Run the grading script as shown here to verify your work:
+
+[student@workstation ~]$ lab grade breakfix002-webapp
+PASS    Pod status check
+        - Pod status is Running
+PASS    Curl output check
+        - Curl output is - You are awesome! Keep up the good work! :)
+Success Criteria
+Successful completion of this activity requires that the web page is accessible:
+
+[student@provision ~]$ curl management-frontend-route-management-profiles.apps.ocp4.example.com
+You are awesome! Keep up the good work! :)
