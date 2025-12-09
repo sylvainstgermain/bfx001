@@ -14,3 +14,7 @@ workstation.lab.example.com	172.25.250.9	Graphical workstation that students use
 Access method	Endpoint
 Web console	https://console-openshift-console.apps.ocp4.example.com
 API	https://api.ocp4.example.com:6443
+
+The registry server provides the https://registry.ocp4.example.com:8443/ container image registry to the classroom environment. The registry is configured with a user account, developer, which has the developer password.
+
+The following table provides the container image repositories that are used in this course and their public repositories.
