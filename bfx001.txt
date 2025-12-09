@@ -18,3 +18,46 @@ API	https://api.ocp4.example.com:6443
 The registry server provides the https://registry.ocp4.example.com:8443/ container image registry to the classroom environment. The registry is configured with a user account, developer, which has the developer password.
 
 The following table provides the container image repositories that are used in this course and their public repositories.
+
+
+The syntax for running an exercise script is as follows:
+
+[student@workstation ~]$ lab action exercise
+The action is a choice of start, grade, or finish. All exercises support start and finish. Only end-of-chapter labs and comprehensive review labs support grade.
+
+start
+The start action verifies the required resources to begin an exercise. It might include configuring settings, creating resources, confirming prerequisite services, and verifying necessary outcomes from previous exercises. You can perform an exercise at any time, even without performing preceding exercises.
+
+grade
+For gradable activities, the grade action directs the lab command to evaluate your work, and shows a list of grading criteria with a PASS or FAIL status for each. To achieve a PASS status for all criteria, fix the failures and rerun the grade action.
+
+finish
+The finish action cleans up resources that were configured during the exercise. You can perform an exercise as many times as you want.
+
+The lab command supports tab completion. For example, to list all exercises that you can start, enter lab start and then press the Tab key twice.
+
+Lab Directory Considerations
+The BFX001 course uses a Python-based lab script that configures the directory structure for each guided exercise and lab activity. The workspace directory for this course is /home/student/BFX001.
+
+The lab script copies the necessary files for each course activity to the workspace directory.
+
+For example, the lab start updates-rollout command does the following tasks:
+
+Creates an updates-rollout directory in the workspace: /home/student/BFX001/labs/updates-rollout workspace.
+
+Copies the files for the activity to the /home/student/BFX001/labs/updates-rollout directory.
+
+Troubleshooting Lab Scripts
+If an error occurs while running the lab command, then you might want to review the following files:
+
+/tmp/log/labs: This directory contains log files. The lab script creates a unique log file for each activity. For example, the log file for the lab start updates-rollout command is /tmp/log/labs/updates-rollout.
+
+/home/student/.grading/config.yaml: This file contains the course-specific configuration. Do not modify this file.
+
+The lab start commands usually verify whether the Red Hat OpenShift Container Platform (RHOCP) cluster is ready and reachable.
+If you run the lab start command right after creating the classroom environment, then you might get errors when the command verifies the cluster API or the credentials.
+ These errors occur because the RHOCP cluster might take up to 15 minutes to become available. A convenient solution is to run the lab finish command to clean up the scenario, wait a few minutes, and then rerun the lab start command.
+
+
+ ####### start
+ lab start breakfix001-dbpod
