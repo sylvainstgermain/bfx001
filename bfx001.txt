@@ -1,0 +1,16 @@
+bfx001-4.18-ed1-20251125-1333b68
+
+All student computer systems have a standard user account, student, which has the student password. The root password on all student systems is redhat.
+
+Machine name	IP addresses	Role
+bastion.lab.example.com	172.25.250.254	Router that links VMs to central servers
+classroom.lab.example.com	172.25.252.254	Server that hosts the required classroom materials
+idm.ocp4.example.com	192.168.50.40	Identity management server for cluster authentication and authorization support
+master01.ocp4.example.com	192.168.50.10	An RHOCP single-node (SNO) cluster
+registry.ocp4.example.com	192.168.50.50	Registry server to provide a private registry and GitLab services to the cluster
+utility.lab.example.com	192.168.50.254	Server that provides supporting services that the RHOCP cluster requires, including DHCP, NFS, and routing to the cluster network
+workstation.lab.example.com	172.25.250.9	Graphical workstation that students use
+
+Access method	Endpoint
+Web console	https://console-openshift-console.apps.ocp4.example.com
+API	https://api.ocp4.example.com:6443
