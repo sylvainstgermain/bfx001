@@ -61,3 +61,28 @@ If you run the lab start command right after creating the classroom environment,
 
  ####### start
  lab start breakfix001-dbpod
+
+
+[student@workstation ~]$ oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+Login successful.
+
+You have access to 71 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+Welcome! See 'oc help' to get started.
+
+[student@workstation ~]$ oc get pods -n finance-payroll
+NAME                          READY   STATUS    RESTARTS   AGE
+postgresql-65cf498466-gnzc4   0/1     Pending   0          51m
+Grade
+Run the grading script as shown here to verify your work:
+
+[student@workstation ~]$ lab grade breakfix001-dbpod
+PASS    Pod status check
+        - Pod status is Running
+Success Criteria
+Successful completion of this activity requires that you deploy the postgresql pod in the finance-payroll project.
+
+[student@workstation ~]$ oc get pods -n finance-payroll
+NAME                          READY   STATUS    RESTARTS   AGE
+postgresql-68777794cf-7fx79   1/1     Running   0          4m29s
